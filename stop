@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ln -sf /bin/false shouldReboot
+screen -S minecraft -p 0 -X stuff "stop $(printf '\r')"

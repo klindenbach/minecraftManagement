@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while ./shouldReboot
+	do java -Xmx1024M -Xms1024M -jar /home/minecraft/minecraft_server.jar nogui | tee >(python -u filter.py)
+done 

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+screen -S minecraft -X stuff "say Backup starting. World no longer saving!... $(printf '\r')"
+screen -S minecraft -X stuff "save-off $(printf '\r')"
+screen -S minecraft -X stuff "save-all $(printf '\r')"
+
+NOW=$(date +"%m-%d-%Y")
+FILE="backup.$NOW.tar.gz"
+ 
+find /home/minecraft/backups -mtime +31 -delete
+tar -cvzf /home/minecraft/backups/$FILE -C / home/minecraft/world
+ 
+screen -S minecraft -X stuff "save-on $(printf '\r')"
+screen -S minecraft -X stuff "say Backup complete! World now saving. $(printf '\r')"
