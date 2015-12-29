@@ -1,13 +1,15 @@
 import sys
 import subprocess
+import random 
 
 PLAYERFILE = "/home/minecraft/known-players.txt"
 
 '''
   EDIT HERE TO CHANGE MINECRAFT COMMAND
 '''
-def getSayCommand(uuid):
-    return "say Hello " + uuid
+def getCommand(uuid):
+    teams = ['Kalokairi', 'Fons', 'Mavet',	'Bagno']
+    return "scoreboard teams join "  + teams[random.randint(0,10000000) % 4] + " " + uuid
 
 def main():
     while 1:
@@ -46,9 +48,13 @@ def addNewPlayer(uuid):
     log("Added " + uuid)
 
 def executeNewPlayer(uuid):
+
+    command = getCommand(uuid)
+
+    log("RUNNING: " + command)
     subprocess.call([
         'screen', '-S', 'minecraft', '-p', '0', '-X', 'stuff',
-        getSayCommand(uuid) + '\r'
+        command + '\r'
     ])
     
 

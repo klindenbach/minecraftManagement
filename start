@@ -1,4 +1,9 @@
 #!/bin/bash
 
 ln -sf /bin/true shouldReboot
-su - minecraft -c "cd /home/minecraft && screen -d -m -S minecraft ./rebootScript"
+if [ "$USER" == "minecraft" ]
+then
+    cd /home/minecraft && screen -d -m -S minecraft ./rebootScript
+else
+    su - minecraft -c "cd /home/minecraft && screen -d -m -S minecraft ./rebootScript"
+fi
